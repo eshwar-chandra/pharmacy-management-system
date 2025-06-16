@@ -36,7 +36,11 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public List<MedicineDTO> getAllMedicines() {
-        return null;
+        log.info("Fetching all medicines");
+        List<Medicine> medicines = medicineRepository.findAll();
+        return medicines.stream()
+                .map(medicineMapper::toDTO)
+                .collect(java.util.stream.Collectors.toList());
     }
 
     @Override
@@ -70,8 +74,15 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public void deleteMedicine(Long id) {
-        log.info("Deleting medicine with ID: {}", id);
-        medicineRepository.deleteById(id);
+        Optional<Medicine> optionalMedicine = medicineRepository.findById(id);
+        if (optionalMedicine.isPresent()) {
+            Medicine medicine = optionalMedicine.get();
+            medicine.setSoftDelete(true);
+            medicineRepository.save(medicine);
+            log.info("Soft deleting medicine with ID: {}", id);
+        } else {
+            log.warn("Medicine with ID: {} not found for deletion.", id);
+        }
     }
 }
 

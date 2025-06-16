@@ -12,12 +12,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.annotations.Where;
 import lombok.NoArgsConstructor;
 
 
 @Data
 @Entity
 @Table(name = "medicine")
+@Where(clause = "soft_delete = false")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Medicine {

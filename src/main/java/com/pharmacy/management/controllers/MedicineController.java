@@ -2,6 +2,7 @@ package com.pharmacy.management.controllers;
 
 import com.pharmacy.management.dto.MedicineDTO;
 import com.pharmacy.management.services.MedicineService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +30,12 @@ public class MedicineController {
     public MedicineDTO getMedicineById(@PathVariable Long id) {
         log.info("Fetching medicine with ID: {}", id);
         return medicineService.getMedicineById(id);
+    }
+
+    @GetMapping
+    public List<MedicineDTO> getAllMedicines() {
+        log.info("Request to fetch all medicines");
+        return medicineService.getAllMedicines();
     }
 
     @PostMapping

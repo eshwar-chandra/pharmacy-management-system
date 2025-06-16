@@ -38,7 +38,7 @@ CREATE TABLE customers (
 
 CREATE TABLE stock (
    stock_id SERIAL PRIMARY KEY,
-   item_id INT REFERENCES items(item_id),
+   item_id INT REFERENCES medicine(item_id),
    quantity INT NOT NULL,
    price DECIMAL(10, 2) NOT NULL,
    expiry_date DATE,
@@ -64,7 +64,7 @@ CREATE TABLE sales (
 CREATE TABLE sales_items (
    sales_item_id SERIAL PRIMARY KEY,
    sale_id INT REFERENCES sales(sale_id),
-   item_id INT REFERENCES items(item_id),
+   item_id INT REFERENCES medicine(item_id),
    quantity INT NOT NULL,
    price_per_unit DECIMAL(10, 2) NOT NULL,
    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
