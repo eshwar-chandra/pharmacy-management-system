@@ -1,4 +1,4 @@
-package com.pharmacy.management.models;
+package com.pharmacy.management.user; // Updated package
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

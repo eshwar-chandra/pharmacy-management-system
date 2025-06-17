@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: pharmacy-management-system
+  cache:
+    cache-names:
+      - medicineCache
+      - userCache
+      - customerCache
+    caffeine:
+      spec: # Common spec for all caches unless overridden
+        maximumSize: 500
+        expireAfterWrite: 10m # Default TTL for caches
+# Individual cache specs can also be defined here if needed, overriding the common spec:
+#        medicineCache: maximumSize=100,expireAfterWrite=5m
+#        userCache: maximumSize=200,expireAfterWrite=15m
+#        customerCache: maximumSize=200,expireAfterWrite=15m
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info # Expose only health and info by default
+        # exclude: env,beans,configprops,loggers,metrics,heapdump,threaddump # Example of explicit exclusion
+    jmx:
+      exposure:
+        exclude: "*" # Disable JMX exposure by default
+  endpoint:
+    health:
+      show-details: when_authorized # or 'always' if appropriate, consider security
+      # Probes can be enabled for K8s environments if needed
+      # probes:
+      #   enabled: true
+    info:
+      # Enable git and build info contributors
+      git:
+        mode: full
+      build:
+        enabled: true
+
+# Spring Boot 3.2+ / Project Loom - Virtual Threads
+# Requires JDK 21 or newer to be effective.
+# When enabled, Tomcat (the default embedded server) will use virtual threads for request processing,
+# which can improve scalability for applications with many I/O-bound operations.
+# Other embedded servers like Jetty and Undertow also support virtual threads if configured.
+# spring:
+#   threads:
+#     virtual:
+#       enabled: true

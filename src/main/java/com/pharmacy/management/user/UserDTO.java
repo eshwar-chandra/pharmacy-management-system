@@ -1,4 +1,4 @@
-package com.pharmacy.management.dto;
+package com.pharmacy.management.user; // Updated package
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

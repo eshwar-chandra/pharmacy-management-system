@@ -1,4 +1,4 @@
-package com.pharmacy.management.models;
+package com.pharmacy.management.customer; // Updated package
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,25 +10,25 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "customers")
 @AllArgsConstructor
 @NoArgsConstructor
 @Where(clause = "soft_delete = false")
 @Builder
-public class User {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "customer_id")
+    private Long customerId;
 
-    @Column(name = "username", unique = true, nullable = false)
-    private String username;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "password", nullable = false)
-    private String password; // In a real app, this would be hashed
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email")
     private String email;
 
     @Column(name = "created_at", updatable = false)
@@ -42,12 +42,12 @@ public class User {
 
     @PrePersist
     protected void onCreate() {
-       createdAt = new Timestamp(System.currentTimeMillis());
-       updatedAt = new Timestamp(System.currentTimeMillis());
+        createdAt = new Timestamp(System.currentTimeMillis());
+        updatedAt = new Timestamp(System.currentTimeMillis());
     }
 
     @PreUpdate
     protected void onUpdate() {
-       updatedAt = new Timestamp(System.currentTimeMillis());
+        updatedAt = new Timestamp(System.currentTimeMillis());
     }
 }

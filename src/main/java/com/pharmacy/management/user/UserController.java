@@ -1,7 +1,7 @@
-package com.pharmacy.management.controllers;
+package com.pharmacy.management.user; // Updated package
 
-import com.pharmacy.management.dto.UserDTO;
-import com.pharmacy.management.services.UserService;
+import com.pharmacy.management.user.UserDTO; // Updated import
+import com.pharmacy.management.user.UserService; // Updated import
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,13 +21,11 @@ import java.util.List;
 @Tag(name = "User Management", description = "APIs for managing users")
 @Slf4j
 @RestController
-@RequestMapping("/api/users") // Changed to /api/users to avoid conflicts if any
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    // Constructor removed, @RequiredArgsConstructor handles it
 
     @Operation(summary = "Get a user by their ID", description = "Fetches a user based on their unique identifier.")
     @ApiResponses(value = {
@@ -48,7 +46,7 @@ public class UserController {
     @Operation(summary = "Get all users", description = "Retrieves a list of all users.")
     @ApiResponse(responseCode = "200", description = "Successfully retrieved list of users",
             content = { @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = UserDTO.class)) }) // Assuming list of UserDTO
+                    schema = @Schema(implementation = UserDTO.class)) })
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         log.info("API request to get all users");
@@ -101,8 +99,6 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(
             @Parameter(description = "ID of the user to delete", required = true) @PathVariable Long id) {
         log.info("API request to delete user with ID: {}", id);
-        // Similar to MedicineController, assuming service handles not found logging.
-        // For strict 404 from controller based on service boolean return, service would need to change.
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
