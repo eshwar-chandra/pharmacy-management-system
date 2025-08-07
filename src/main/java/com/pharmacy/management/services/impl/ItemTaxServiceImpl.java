@@ -22,20 +22,20 @@ public class ItemTaxServiceImpl implements ItemTaxService {
     @Autowired
     private TaxRepository taxRepository;
 
-@Override
-public void saveAllItemMapping(List<TaxRequestDto> taxes, Item item) {
-    List<ItemTax> itemTaxes = new ArrayList<>();
+    @Override
+    public void saveAllItemMapping(List<TaxRequestDto> taxes, Item item) {
+        List<ItemTax> itemTaxes = new ArrayList<>();
 
-    for (TaxRequestDto taxRequestDto : taxes) {
-        Tax tax = taxRepository.findById(taxRequestDto.getId())
-                .orElseThrow(() -> new RuntimeException("Tax not found"));
-        ItemTax itemTax = new ItemTax();
-        itemTax.setItem(item);
-        itemTax.setTax(tax);
-        itemTaxes.add(itemTax);
+        for (TaxRequestDto taxRequestDto : taxes) {
+            Tax tax = taxRepository.findById(taxRequestDto.getId())
+                    .orElseThrow(() -> new RuntimeException("Tax not found"));
+            ItemTax itemTax = new ItemTax();
+            itemTax.setItem(item);
+            itemTax.setTax(tax);
+            itemTaxes.add(itemTax);
+        }
+
+        itemTaxRepository.saveAll(itemTaxes);
     }
-
-    itemTaxRepository.saveAll(itemTaxes);
-}
 
 }
