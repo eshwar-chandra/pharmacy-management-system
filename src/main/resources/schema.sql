@@ -113,6 +113,7 @@ CREATE TABLE sales_items (
    -- Add additional fields as needed
 );
 
+
 --taxes table structure which can hold types of taxes and their rates and detasils of taxes
 CREATE TABLE taxes (
    id SERIAL PRIMARY KEY,
@@ -139,3 +140,4 @@ CREATE TABLE item_taxes (
 CREATE INDEX idx_items_name ON items (name);
 CREATE INDEX idx_items_manf_name ON items (manf_name);
 CREATE INDEX idx_items_generic_name ON items (generic_name);
+

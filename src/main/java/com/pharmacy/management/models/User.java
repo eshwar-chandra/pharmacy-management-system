@@ -1,38 +1,36 @@
 package com.pharmacy.management.models;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Where;
-
+import lombok.AllArgsConstructor;
 import java.sql.Timestamp;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users", schema = "${myapp.schema.name}")
-@AllArgsConstructor
-@NoArgsConstructor
-@Where(clause = "soft_delete = false")
-@Builder
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "username", unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(name = "password", nullable = false)
-    private String password; // In a real app, this would be hashed
+    @Column(nullable = false)
+    private String password;
 
-    @Column(name = "email", unique = true)
+    @Column(unique = true)
     private String email;
 
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at")
     private Timestamp createdAt;
 
     @Column(name = "updated_at")
@@ -55,3 +53,4 @@ public class User {
        updatedAt = new Timestamp(System.currentTimeMillis());
     }
 }
+
