@@ -101,8 +101,6 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(
             @Parameter(description = "ID of the user to delete", required = true) @PathVariable Long id) {
         log.info("API request to delete user with ID: {}", id);
-        // Similar to MedicineController, assuming service handles not found logging.
-        // For strict 404 from controller based on service boolean return, service would need to change.
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }

@@ -3,7 +3,7 @@ spring:
     name: pharmacy-management-system
   cache:
     cache-names:
-      - medicineCache
+        - itemCache
       - userCache
       - customerCache
     caffeine:
@@ -11,7 +11,7 @@ spring:
         maximumSize: 500
         expireAfterWrite: 10m # Default TTL for caches
 # Individual cache specs can also be defined here if needed, overriding the common spec:
-#        medicineCache: maximumSize=100,expireAfterWrite=5m
+#        itemCache: maximumSize=100,expireAfterWrite=5m
 #        userCache: maximumSize=200,expireAfterWrite=15m
 #        customerCache: maximumSize=200,expireAfterWrite=15m
 
