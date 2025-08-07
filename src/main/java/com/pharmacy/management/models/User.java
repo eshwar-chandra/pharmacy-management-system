@@ -40,5 +40,17 @@ public class User {
     private Timestamp deletedAt;
 
     @Column(name = "soft_delete", nullable = false, columnDefinition = "boolean default false")
-    private Boolean softDelete;
+    private Boolean softDelete = false;
+
+    @PrePersist
+    protected void onCreate() {
+       createdAt = new Timestamp(System.currentTimeMillis());
+       updatedAt = new Timestamp(System.currentTimeMillis());
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+       updatedAt = new Timestamp(System.currentTimeMillis());
+    }
 }
+
