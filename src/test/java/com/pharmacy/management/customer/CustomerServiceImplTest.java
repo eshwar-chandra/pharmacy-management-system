@@ -1,9 +1,9 @@
-package com.pharmacy.management.services.impl;
+package com.pharmacy.management.customer;
 
-import com.pharmacy.management.dto.CustomerDTO;
-import com.pharmacy.management.mapper.CustomerMapper;
-import com.pharmacy.management.models.Customer;
-import com.pharmacy.management.repositories.CustomerRepository;
+import com.pharmacy.management.customer.CustomerDTO;
+import com.pharmacy.management.customer.CustomerMapper;
+import com.pharmacy.management.customer.Customer;
+import com.pharmacy.management.customer.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
