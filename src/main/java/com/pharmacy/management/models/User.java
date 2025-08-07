@@ -6,11 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
+
 import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "${myapp.schema.name}")
 @AllArgsConstructor
 @NoArgsConstructor
 @Where(clause = "soft_delete = false")
@@ -37,8 +38,11 @@ public class User {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    @Column(name = "soft_delete")
-    private boolean softDelete = false;
+    @Column(name = "deleted_at")
+    private Timestamp deletedAt;
+
+    @Column(name = "soft_delete", nullable = false, columnDefinition = "boolean default false")
+    private Boolean softDelete = false;
 
     @PrePersist
     protected void onCreate() {
