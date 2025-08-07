@@ -1,7 +1,6 @@
 package com.pharmacy.management.services.impl;
 
 import com.pharmacy.management.dtos.request.ItemRequestDto;
-import com.pharmacy.management.dtos.request.TaxRequestDto;
 import com.pharmacy.management.dtos.response.ItemResponseDto;
 import com.pharmacy.management.models.Item;
 import com.pharmacy.management.mapper.ItemMapper;
@@ -25,14 +24,15 @@ public class ItemServiceImpl implements ItemService {
         this.itemMapper = itemMapper;
         this.itemTaxService = itemTaxService;
     }
-@Override
-public ItemResponseDto createItem(ItemRequestDto itemRequestDto) {
-    Item item = itemMapper.itemRequestDtoToItem(itemRequestDto);
-    Item savedItem = itemRepository.save(item);
-    // Save all item taxes in a batch
-    itemTaxService.saveAllItemMapping(itemRequestDto.getTaxes(), savedItem);
-    return itemMapper.itemToItemResponseDto(savedItem);
-}
+
+    @Override
+    public ItemResponseDto createItem(ItemRequestDto itemRequestDto) {
+        Item item = itemMapper.itemRequestDtoToItem(itemRequestDto);
+        Item savedItem = itemRepository.save(item);
+        // Save all item taxes in a batch
+        itemTaxService.saveAllItemMapping(itemRequestDto.getTaxes(), savedItem);
+        return itemMapper.itemToItemResponseDto(savedItem);
+    }
 
     @Override
     public ItemResponseDto updateItem(Long id, ItemRequestDto itemRequestDto) {
